@@ -20,7 +20,7 @@ Large video files are longer than 30 second up to 140 seconds and/or a file size
 	$ pip install requirements.txt
 	```
 
-2. Fill in your consumer keys and access tokens:
+2. Fill in your consumer keys and access tokens in `async-upload.py`:
 
 	```
 	CONSUMER_KEY = 'your-consumer-key'
