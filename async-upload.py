@@ -46,7 +46,7 @@ class VideoTweet(object):
       'command': 'INIT',
       'media_type': 'video/mp4',
       'total_bytes': self.total_bytes,
-      'media_category': 'tweetvideo'
+      'media_category': 'tweet_video'
     }
 
     req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, auth=oauth)
