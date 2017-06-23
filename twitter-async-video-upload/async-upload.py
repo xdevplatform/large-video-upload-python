@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-
 import json
 import requests
 from requests_oauthlib import OAuth1
@@ -10,29 +9,17 @@ from requests_oauthlib import OAuth1
 MEDIA_ENDPOINT_URL = 'https://upload.twitter.com/1.1/media/upload.json'
 POST_TWEET_URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
-CONSUMER_KEY = 'your-consumer-key'
-CONSUMER_SECRET = 'your-consumer-secret'
-ACCESS_TOKEN = 'your-access-token'
-ACCESS_TOKEN_SECRET = 'your-access-secret'
-
-VIDEO_FILENAME = 'path/to/video/file'
-
-
-oauth = OAuth1(CONSUMER_KEY,
-  client_secret=CONSUMER_SECRET,
-  resource_owner_key=ACCESS_TOKEN,
-  resource_owner_secret=ACCESS_TOKEN_SECRET)
-
 
 class VideoTweet(object):
 
-  def __init__(self, file_name):
+  def __init__(self, file_name, oauth, media_id=None):
     '''
     Defines video tweet properties
     '''
     self.video_filename = file_name
     self.total_bytes = os.path.getsize(self.video_filename)
-    self.media_id = None
+    self.oauth = oauth
+    self.media_id = media_id
     self.processing_info = None
 
 
@@ -55,6 +42,8 @@ class VideoTweet(object):
     self.media_id = media_id
 
     print('Media ID: %s' % str(media_id))
+
+    return media_id
 
 
   def upload_append(self):
@@ -148,22 +137,14 @@ class VideoTweet(object):
     self.check_status()
 
 
-  def tweet(self):
+  def tweet(self, status):
     '''
     Publishes Tweet with attached video
     '''
     request_data = {
-      'status': 'I just uploaded a video with the @TwitterAPI.',
+      'status': status',
       'media_ids': self.media_id
     }
 
     req = requests.post(url=POST_TWEET_URL, data=request_data, auth=oauth)
     print(req.json())
-
-
-if __name__ == '__main__':
-  videoTweet = VideoTweet(VIDEO_FILENAME)
-  videoTweet.upload_init()
-  videoTweet.upload_append()
-  videoTweet.upload_finalize()
-  videoTweet.tweet()
