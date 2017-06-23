@@ -36,7 +36,7 @@ class VideoTweet(object):
       'media_category': 'tweet_video'
     }
 
-    req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, auth=oauth)
+    req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, auth=self.oauth)
     media_id = req.json()['media_id']
 
     self.media_id = media_id
@@ -69,7 +69,7 @@ class VideoTweet(object):
         'media':chunk
       }
 
-      req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, files=files, auth=oauth)
+      req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, files=files, auth=self.oauth)
 
       if req.status_code < 200 or req.status_code > 299:
         print(req.status_code)
@@ -95,7 +95,7 @@ class VideoTweet(object):
       'media_id': self.media_id
     }
 
-    req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, auth=oauth)
+    req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, auth=self.oauth)
     print(req.json())
 
     self.processing_info = req.json().get('processing_info', None)
@@ -131,7 +131,7 @@ class VideoTweet(object):
       'media_id': self.media_id
     }
 
-    req = requests.get(url=MEDIA_ENDPOINT_URL, params=request_params, auth=oauth)
+    req = requests.get(url=MEDIA_ENDPOINT_URL, params=request_params, auth=self.oauth)
     
     self.processing_info = req.json().get('processing_info', None)
     self.check_status()
@@ -146,5 +146,5 @@ class VideoTweet(object):
       'media_ids': self.media_id
     }
 
-    req = requests.post(url=POST_TWEET_URL, data=request_data, auth=oauth)
+    req = requests.post(url=POST_TWEET_URL, data=request_data, auth=self.oauth)
     print(req.json())
