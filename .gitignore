@@ -23,6 +23,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+*.lock
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -90,3 +91,5 @@ ENV/
 
 
 .DS_Store
+
+.vscode/
