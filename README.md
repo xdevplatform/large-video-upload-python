@@ -42,4 +42,4 @@ Large video files are longer than 30 seconds / up to 140 seconds, and/or a file 
 	$ python async-upload.py
 	```
 
-Questions? Check our [developer discussion forums](https://https://twittercommunity.com/c/media-apis).
+Questions? Check our [developer discussion forums](https://twittercommunity.com/c/media-apis).
